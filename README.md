@@ -1,6 +1,6 @@
 # 📬 Feedback Board
 
-A lightweight internal feedback management system built for **Basalam**, allowing customers to submit feedback through a beautiful glassmorphism UI, while admins manage and track statuses through a secure dashboard.
+A lightweight internal feedback management system allowing customers to submit feedback through a beautiful glassmorphism UI, while admins manage and track statuses through a secure dashboard.
 
 ---
 
