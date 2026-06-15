@@ -1,6 +1,6 @@
-# 📬Feedback Board
+# 📬 Feedback Board
 
-A lightweight internal feedback management system , allowing customers to submit feedback through a beautiful glassmorphism UI, while admins manage and track statuses through a secure dashboard.
+A lightweight internal feedback management system built for **Basalam**, allowing customers to submit feedback through a beautiful glassmorphism UI, while admins manage and track statuses through a secure dashboard.
 
 ---
 
@@ -141,6 +141,12 @@ For production, consider migrating from SQLite to PostgreSQL or MySQL by updatin
 ## 🤝 Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 👩‍💻 Author
+
+**Sepideh Pashayan**
 
 ---
 
