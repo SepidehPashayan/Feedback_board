@@ -40,8 +40,8 @@ A lightweight internal feedback management system allowing customers to submit f
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/basalam-feedback-board.git
-cd basalam-feedback-board
+git clone https://github.com/your-username/Feedback-board.git
+cd Feedback-board
 
 # 2. Create and activate a virtual environment
 python -m venv venv
