@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ثبت فیدبک</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --accent: #c8a96e;
+      --accent-hover: #e2c48a;
+      --text-primary: #f0eee8;
+      --text-secondary: rgba(240, 238, 232, 0.65);
+      --input-bg: rgba(255,255,255,0.06);
+      --input-border: rgba(255,255,255,0.15);
+      --input-focus: rgba(200, 169, 110, 0.5);
+      --success: #4ade80;
+      --error: #f87171;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Vazirmatn', sans-serif;
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    body {
+      background:
+        linear-gradient(135deg, rgba(15,10,40,0.82) 0%, rgba(30,15,60,0.78) 50%, rgba(10,20,50,0.85) 100%),
+        url('/static/images/background.png') center/cover no-repeat fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+      animation: orbFloat 8s ease-in-out infinite alternate;
+    }
+    body::before {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #7c3aed, transparent);
+      top: -100px; left: -100px;
+    }
+    body::after {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #1d4ed8, transparent);
+      bottom: -80px; right: -80px;
+      animation-delay: -4s;
+    }
+
+    @keyframes orbFloat {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 30px) scale(1.1); }
+    }
+
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.12);
+      padding: 2.5rem 2.5rem 2rem;
+      width: 100%;
+      max-width: 480px;
+      animation: cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo-icon {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, #7c3aed, #1d4ed8);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+      font-size: 1.6rem;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(124,58,237,0.4); }
+      50%       { box-shadow: 0 4px 32px rgba(124,58,237,0.7); }
+    }
+
+    .card-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f0eee8, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-header p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 0.35rem;
+    }
+
+    .field { margin-bottom: 1.3rem; }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    label i { color: var(--accent); font-size: 0.8rem; }
+
+    input, textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+      resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(240,238,232,0.3); }
+
+    input:focus, textarea:focus {
+      border-color: var(--input-focus);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 0 3px rgba(200,169,110,0.15);
+    }
+
+    input:focus + label, textarea:focus + label { color: var(--accent); }
+
+    textarea { min-height: 110px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #7c3aed, #1d4ed8);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+      margin-top: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.5); filter: brightness(1.1); }
+    .btn-submit:hover::after { opacity: 1; }
+    .btn-submit:active { transform: translateY(0); }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .alert {
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      animation: alertIn 0.4s ease both;
+    }
+    @keyframes alertIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .alert-success { background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.3); color: var(--success); }
+    .alert-error   { background: rgba(248,113,113,0.12); border: 1px solid rgba(248,113,113,0.3); color: var(--error); }
+    .hidden { display: none !important; }
+    .footer-link {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .footer-link a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+
+    .footer-link a:hover {
+      color: var(--accent);
+      border-color: rgba(200,169,110,0.4);
+      background: rgba(200,169,110,0.08);
+      transform: translateY(-2px);
+    }
+
+    .particles {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: rgba(200,169,110,0.5);
+      border-radius: 50%;
+      animation: particleDrift linear infinite;
+    }
+
+    @keyframes particleDrift {
+      from { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      to   { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: left 0.1s ease, top 0.1s ease;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="logo-icon"><i class="fa-regular fa-comment-dots" style="color:#fff"></i></div>
+      <h1>ثبت فیدبک</h1>
+      <p>نظر شما برای ما ارزشمند است</p>
+    </div>
+
+    <div id="successMsg" class="alert alert-success hidden">
+      <i class="fa-solid fa-circle-check"></i>
+      فیدبک شما با موفقیت ثبت شد!
+    </div>
+    <div id="errorMsg" class="alert alert-error hidden">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span id="errorText">خطایی رخ داد، لطفاً دوباره تلاش کنید.</span>
+    </div>
+
+    <div class="field">
+      <label for="title"><i class="fa-solid fa-tag"></i> عنوان فیدبک</label>
+      <input id="title" type="text" placeholder="مثلاً: پیشنهاد بهبود جستجو...">
+    </div>
+
+    <div class="field">
+      <label for="message"><i class="fa-solid fa-pen-to-square"></i> پیام شما</label>
+      <textarea id="message" placeholder="توضیحات کامل فیدبک خود را بنویسید..."></textarea>
+    </div>
+
+    <button class="btn-submit" onclick="submitFeedback()" id="submitBtn">
+      <span class="spinner" id="spinner"></span>
+      <i class="fa-solid fa-paper-plane" id="sendIcon"></i>
+      <span id="btnText">ارسال فیدبک</span>
+    </button>
+
+    <div class="footer-link">
+      <a href="/login">
+        <i class="fa-solid fa-shield-halved"></i>
+        ورود به پنل مدیریت
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 3 + 1;
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${size}px; height: ${size}px;
+        animation-duration: ${Math.random() * 12 + 8}s;
+        animation-delay: ${Math.random() * -15}s;
+        --drift: ${(Math.random() - 0.5) * 100}px;
+        opacity: ${Math.random() * 0.6 + 0.2};
+      `;
+      container.appendChild(p);
+    }
+
+    async function submitFeedback() {
+      const title = document.getElementById('title').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const btn = document.getElementById('submitBtn');
+      const spinner = document.getElementById('spinner');
+      const sendIcon = document.getElementById('sendIcon');
+      const btnText = document.getElementById('btnText');
+
+      document.getElementById('successMsg').classList.add('hidden');
+      document.getElementById('errorMsg').classList.add('hidden');
+
+      if (!title || !message) {
+        showError('لطفاً عنوان و پیام را پر کنید');
+        return;
+      }
+
+      btn.disabled = true;
+      spinner.style.display = 'block';
+      sendIcon.style.display = 'none';
+      btnText.textContent = 'در حال ارسال...';
+
+      try {
+        const res = await fetch('/api/feedbacks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, message })
+        });
+
+        if (res.ok) {
+          document.getElementById('title').value = '';
+          document.getElementById('message').value = '';
+          document.getElementById('successMsg').classList.remove('hidden');
+          setTimeout(() => document.getElementById('successMsg').classList.add('hidden'), 4000);
+        } else {
+          showError('خطا در ارسال. لطفاً دوباره تلاش کنید.');
+        }
+      } catch {
+        showError('اتصال به سرور برقرار نشد.');
+      }
+
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      sendIcon.style.display = 'inline';
+      btnText.textContent = 'ارسال فیدبک';
+    }
+
+    function showError(msg) {
+      document.getElementById('errorText').textContent = msg;
+      document.getElementById('errorMsg').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
